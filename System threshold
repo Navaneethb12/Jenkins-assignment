@@ -1,0 +1,30 @@
+# Set thresholds
+CPU_THRESHOLD=80
+MEM_THRESHOLD=80
+DISK_THRESHOLD=90
+
+# Check CPU usage
+CPU_USAGE=$(top -bn1 | awk '/Cpu\(s\)/ {print $2}' | awk -F. '{print $1}')
+if [ $CPU_USAGE -gt $CPU_THRESHOLD ]; then
+  echo "CPU usage high: $CPU_USAGE%"
+  else
+  echo "CPU usage low"
+fi
+
+# Check memory usage
+MEM_USAGE=$(free -m | awk '/Mem:/ {print $3/$2 * 100}' | awk -F. '{print $1}')
+if [ $MEM_USAGE -gt $MEM_THRESHOLD ]; then
+  echo "Memory usage high: $MEM_USAGE%"
+  else
+  echo "Memory usage is low"
+fi
+
+# Check disk usage
+DISK_USAGE=$(df -h / | awk '/\// {print $5}' | sed 's/%//')
+if [ $DISK_USAGE -gt $DISK_THRESHOLD ]; then
+  echo "Disk usage high: $DISK_USAGE%"
+  else
+  echo "Disk usage is low"
+fi
+whoami
+pwd
