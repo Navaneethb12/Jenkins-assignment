@@ -28,3 +28,4 @@ if [ $DISK_USAGE -gt $DISK_THRESHOLD ]; then
 fi
 whoami
 pwd
+echo "webhook triggered for freestyle job"
